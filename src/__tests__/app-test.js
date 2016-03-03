@@ -1,20 +1,20 @@
 jest.dontMock('../app')
 
-import React from 'react';
-import ReactDOM from 'react-dom';
-import TestUtils from 'react-addons-test-utils';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import TestUtils from 'react-addons-test-utils'
 
-const App = require('../app').default;
+//jest auto-mocking is incompatible with babel es6/jsx transforms :-(
+// https://github.com/babel/babel-jest/issues/16
+const App = require('../app').default
 
 describe('App', () => {
 
   it('greets the user', () => {
-    var container = TestUtils.renderIntoDocument(
-      React.createElement(App)
-    );
-    var node = ReactDOM.findDOMNode(container);
+    let component = TestUtils.renderIntoDocument(<App />)
+    let node = ReactDOM.findDOMNode(component)
 
-    expect(node.textContent).toBeTruthy();
-  });
+    expect(node.textContent).toBe('Hello, world!')
+  })
 
-});
+})
